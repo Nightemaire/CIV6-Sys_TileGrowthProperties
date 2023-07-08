@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+  <Container ID="TileGrowthOptionsPanel" Size="260,350" Anchor="L,B" ConsumeMouse="1">
+    <Grid Size="parent,parent" Texture="Tracker_OptionsBacking.dds" SliceCorner="55,61" SliceSize="1,1" SliceTextureSize="121,119">
+      <Label Anchor="C,T" String="{LOC_HUD_GROWTH_PROPERTY_LENS:upper}" Offset="-6,10"  Style="FontFlair16" Color0="106,93,69,255" Color1="0,0,0,150" Color2="146,133,109,255" FontStyle="Glow" SmallCaps="20" SmallCapsLeading="0" SmallCapsType="EveryWord" KerningAdjustment="0" AutoScrollBar="1" AutoSizeScrollBar="1"/>
+      
+      <Stack StackGrowth="Down" Padding="5">
+        <RadioButton ID="ShowGrowthPropertyValue" IsChecked="1" RadioGroup="ShowGrowthParm" TextOffset="-1,-1" String="LOC_PANEL_SHOW_GROWTH_VALUE" Style="WhiteSemiBold14" Offset="17,40" ButtonTexture="Controls_RadioButtonLarge.dds" ButtonSize="35,35" CheckTexture="Controls_RadioButtonLarge.dds" CheckSize="35,35" CheckTextureOffset="0,35" Anchor="L,T" BoxOnLeft="1"/>
+        <RadioButton ID="ShowGrowthPropertyGrowth" IsChecked="0" RadioGroup="ShowGrowthParm" TextOffset="-1,-1" String="LOC_PANEL_SHOW_GROWTH_GROWTH" Style="WhiteSemiBold14" Offset="17,-10" ButtonTexture="Controls_RadioButtonLarge.dds" ButtonSize="35,35" CheckTexture="Controls_RadioButtonLarge.dds" CheckSize="35,35" CheckTextureOffset="0,35" Anchor="L,T" BoxOnLeft="1"/>
+      </Stack>
+
+      <Container Anchor="C,T" Offset="-5, 110" Size="parent-45,70">
+        <Grid Texture="Controls_SeparatorAngled" TextureSize="14,6" Anchor="C,T" Size="parent,6" SliceCorner="6,4" Offset="0,0"/>
+      </Container>
+
+      <ScrollPanel ID="GrowthPropertyPickList" Anchor="L,T" Offset="20,120" Size="parent,parent-65" Style="ScrollPanelWithLeftBar">
+        <Stack ID="GrowthPropertyStack" Anchor="L,T" StackGrowth="Down" Offset="-10,0" StackPadding="5">
+        </Stack>
+      </ScrollPanel>      
+    </Grid>
+  </Container>
+
+  <Instance Name="GrowthPropertyPickEntry">
+    <Container Size="130,20">
+      <RadioButton ID="ShowGrowthProperty" IsChecked="0" RadioGroup="GrowthPropertyPick" TextOffset="0,0" Style="WhiteSemiBold14" Offset="20,0" ButtonTexture="Controls_RadioButtonLarge.dds" ButtonSize="35,35" CheckTexture="Controls_RadioButtonLarge.dds" CheckSize="35,35" CheckTextureOffset="0,35" Anchor="L,T" BoxOnLeft="1"/>
+      <Label ID="PropertyLabel" String="$Property$" Anchor="L,C" Offset="60,5" Style="WhiteSemiBold14" TextAlign="Left"/>
+    </Container>
+  </Instance>
+
+</Context>

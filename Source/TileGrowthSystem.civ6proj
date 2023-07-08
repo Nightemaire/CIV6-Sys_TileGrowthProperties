@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Name>TileGrowthSystem</Name>
+    <Guid>979651ac-4cd7-44a2-b2ac-9753b9aa022c</Guid>
+    <ProjectGuid>ccc58442-2d60-4449-ae8f-12af62283541</ProjectGuid>
+    <ModVersion>1</ModVersion>
+    <Teaser>This system implements an efficient way of tracking properties that accumulate on tiles with the intent of triggering events wh</Teaser>
+    <Description>This system implements an efficient way of tracking properties that accumulate on tiles with the intent of triggering events when they reach a specific threshold.</Description>
+    <Authors>Nightemaire</Authors>
+    <SpecialThanks>
+    </SpecialThanks>
+    <AffectsSavedGames>true</AffectsSavedGames>
+    <SupportsSinglePlayer>true</SupportsSinglePlayer>
+    <SupportsMultiplayer>true</SupportsMultiplayer>
+    <SupportsHotSeat>true</SupportsHotSeat>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+    <AssemblyName>TileGrowthSystem</AssemblyName>
+    <RootNamespace>TileGrowthSystem</RootNamespace>
+    <InGameActionData><![CDATA[<InGameActions><UpdateText id="Add_Localization"><File>UI/TileGrowth_UI_Text.xml</File></UpdateText><UpdateDatabase id="Add_Colors"><File>UI/TileGrowth_Lens_Colors.sql</File></UpdateDatabase><AddUserInterfaces id="Add_Lens"><Properties><LoadOrder>102</LoadOrder><Context>InGame</Context></Properties><File>UI/ModLens_TileGrowth.xml</File></AddUserInterfaces><AddGameplayScripts id="Add_System"><File>TileGrowthSystem.lua</File></AddGameplayScripts><ReplaceUIScript id="Add_PlotTooltip"><Properties><LuaContext>PlotToolTip</LuaContext><LuaReplace>PlotToolTip_TileGrowth.lua</LuaReplace><LoadOrder>14050</LoadOrder></Properties><File>PlotToolTip_TileGrowth.lua</File></ReplaceUIScript><ImportFiles id="Import_Tooltip"><Properties><LoadOrder>0</LoadOrder></Properties><File>UI/PlotToolTip_TileGrowth.lua</File></ImportFiles></InGameActions>]]></InGameActionData>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="TileGrowthSystem.Art.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PlotToolTip_TileGrowth.lua">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="TileGrowthSystem.lua">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="TileGrowth_Readme.md">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UI\ModLens_TileGrowth.lua">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UI\ModLens_TileGrowth.xml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UI\TileGrowth_Lens_Colors.sql">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UI\TileGrowth_UI_Text.xml">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)Civ6.targets" />
+</Project>

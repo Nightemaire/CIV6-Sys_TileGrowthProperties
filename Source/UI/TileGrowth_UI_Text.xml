@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Utilization_Lens_Text -->
+<!-- Author: Nightemaire -->
+<!-- DateCreated: 6/26/2022 14:08:44 -->
+
+<GameData>
+	<BaseGameText>
+		<Row Tag="LOC_HUD_GROWTH_PROPERTY_LENS">
+			<Text>Properties</Text>
+		</Row>
+		<Row Tag="LOC_HUD_PROPERTY_LENS_TOOLTIP">
+			<Text>Highlights information about tile properties</Text>
+		</Row>
+		<Row Tag="LOC_PANEL_SHOW_GROWTH_VALUE">
+			<Text>VALUE</Text>
+		</Row>
+		<Row Tag="LOC_PANEL_SHOW_GROWTH_GROWTH">
+			<Text>GROWTH</Text>
+		</Row>
+		<Row Tag="LOC_PANEL_GROWTH_PROPERTY_PICK">
+			<Text>Select a property</Text>
+		</Row>
+		
+		<!-- DEVELOPMENT -->
+		<Row Tag="LOC_TOOLTIP_PROPERTY_LOWEST">
+			<Text>Lowest or Decreasing</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_PROPERTY_LOW">
+			<Text>Low or Stagnant</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_PROPERTY_MEDIUM">
+			<Text>Average or Creeping</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_PROPERTY_HIGH">
+			<Text>High or Increasing</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_PROPERTY_HIGHEST">
+			<Text>Highest or Skyrocketing</Text>
+		</Row>
+		<!-- GROWTH -->
+		<Row Tag="LOC_TOOLTIP_GROWTH_LOWEST">
+			<Text>Decreasing</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_GROWTH_LOW">
+			<Text>Stagnant</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_GROWTH_MEDIUM">
+			<Text>Slightly Increasing</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_GROWTH_HIGH">
+			<Text>Increasing</Text>
+		</Row>
+		<Row Tag="LOC_TOOLTIP_GROWTH_HIGHEST">
+			<Text>Rapidly Increasing</Text>
+		</Row>
+	</BaseGameText>
+</GameData>
