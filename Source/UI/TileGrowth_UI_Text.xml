@@ -8,7 +8,13 @@
 		<Row Tag="LOC_HUD_GROWTH_PROPERTY_LENS">
 			<Text>Properties</Text>
 		</Row>
-		<Row Tag="LOC_HUD_PROPERTY_LENS_TOOLTIP">
+		<Row Tag="LOC_HUD_GROWTH_PROPERTY_GROWTH_LENS">
+			<Text>Current {1_propertyID} growths</Text>
+		</Row>
+		<Row Tag="LOC_HUD_GROWTH_PROPERTY_VALUE_LENS">
+			<Text>Current {1_propertyID} values</Text>
+		</Row>
+		<Row Tag="LOC_HUD_GROWTH_PROPERTY_LENS_TOOLTIP">
 			<Text>Highlights information about tile properties</Text>
 		</Row>
 		<Row Tag="LOC_PANEL_SHOW_GROWTH_VALUE">
@@ -23,35 +29,35 @@
 		
 		<!-- DEVELOPMENT -->
 		<Row Tag="LOC_TOOLTIP_PROPERTY_LOWEST">
-			<Text>Lowest or Decreasing</Text>
+			<Text>Lowest</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_PROPERTY_LOW">
-			<Text>Low or Stagnant</Text>
+			<Text>Low</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_PROPERTY_MEDIUM">
-			<Text>Average or Creeping</Text>
+			<Text>Average</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_PROPERTY_HIGH">
-			<Text>High or Increasing</Text>
+			<Text>High</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_PROPERTY_HIGHEST">
-			<Text>Highest or Skyrocketing</Text>
+			<Text>Highest</Text>
 		</Row>
 		<!-- GROWTH -->
 		<Row Tag="LOC_TOOLTIP_GROWTH_LOWEST">
-			<Text>Decreasing</Text>
+			<Text>Falling</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_GROWTH_LOW">
 			<Text>Stagnant</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_GROWTH_MEDIUM">
-			<Text>Slightly Increasing</Text>
+			<Text>Creeping</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_GROWTH_HIGH">
 			<Text>Increasing</Text>
 		</Row>
 		<Row Tag="LOC_TOOLTIP_GROWTH_HIGHEST">
-			<Text>Rapidly Increasing</Text>
+			<Text>Skyrocketing</Text>
 		</Row>
 	</BaseGameText>
 </GameData>

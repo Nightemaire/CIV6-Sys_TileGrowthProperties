@@ -1,10 +1,10 @@
-include("LensSupport")
-
 local PANEL_OFFSET_Y:number = 32
 local PANEL_OFFSET_X:number = -5
 
-local LENS_NAME = "ML_GROWTH_PROPERTY"
-local ML_LENS_LAYER = UILens.CreateLensLayerHash("Hex_Coloring_Appeal_Level")
+local GROWTH_LENS_NAME = "ML_GROWTH_PROPERTY_GROWTH"
+local VALUE_LENS_NAME = "ML_GROWTH_PROPERTY_VALUE"
+
+local GP_LENS_LAYER = UILens.CreateLensLayerHash("Hex_Coloring_Appeal_Level")
 
 local ColorGradient = {}
 ColorGradient[1]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_1")
@@ -18,10 +18,11 @@ ColorGradient[5]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_5")
 -- ===========================================================================
 
 local m_isOpen:boolean = false
-local m_bonusResourcesToShow:table = {}
 
-ParameterToShow = "Value"
-CurrentPropertyID = ""
+local ParameterToShow = "Value"
+local CurrentPropertyID = ""
+
+local PropertyLegends = {}
 
 -- ===========================================================================
 --  Exported functions
@@ -109,8 +110,29 @@ end
 
 function RefreshPropertyLens()
     -- Assuming lens is already applied
-    UILens.ClearLayerHexes(ML_LENS_LAYER)
+    UILens.ClearLayerHexes(GP_LENS_LAYER)
     SetGrowthPropertyLens()
+end
+
+function UpdateModalPanel(parameterID:string)
+    -- This is printed even if the modal panel is hidden
+    -- print("Showing " .. lensName .. " modal panel")
+
+    if parameterID ~= nil then
+        local ModalPanelEntry = {}
+
+        if parameterID == "Value" then
+            ModalPanelEntry.LensTextKey = Locale.Lookup("LOC_HUD_GROWTH_PROPERTY_VALUE_LENS", CurrentPropertyID)
+            ModalPanelEntry.Legend = PropertyLegends[parameterID]
+            LuaEvents.ModalLensPanel_AddLensEntry(VALUE_LENS_NAME, ModalPanelEntry, true)
+        elseif parameterID == "Growth" then
+            ModalPanelEntry.LensTextKey = Locale.Lookup("LOC_HUD_GROWTH_PROPERTY_GROWTH_LENS", CurrentPropertyID)
+            ModalPanelEntry.Legend = PropertyLegends[parameterID]
+            LuaEvents.ModalLensPanel_AddLensEntry(VALUE_LENS_NAME, ModalPanelEntry, true)
+        end
+    else
+        print("ERROR: parameterID was nil")
+    end
 end
 
 function SetGrowthPropertyLens()
@@ -120,14 +142,17 @@ function SetGrowthPropertyLens()
 	local colorTable = {}
 	if ParameterToShow == "Value" then
 		colorTable = GetValuePlotTable(CurrentPropertyID)
+        UpdateModalPanel(ParameterToShow)
 	elseif ParameterToShow == "Growth" then
 		colorTable = GetGrowthPlotTable(CurrentPropertyID)
+        UpdateModalPanel(ParameterToShow)
 	else
 		print("Show what now? "..ParameterToShow)
 	end
+    
 
 	for k,v in pairs(colorTable) do
-		UILens.SetLayerHexesColoredArea( ML_LENS_LAYER, localPlayer, v, k )
+		UILens.SetLayerHexesColoredArea( GP_LENS_LAYER, localPlayer, v, k )
 	end
 end
 
@@ -172,11 +197,8 @@ function ToggleValueToShow()
 	else
 		ParameterToShow = "Value"
 	end
-    m_resetBonusResourceList = true
-    m_bonusResourcesToShow = {}
 
     -- Assuming resource lens is already applied
-    --RefreshPropertyPicker()
     RefreshPropertyLens()
 end
 
@@ -227,10 +249,10 @@ end
 -- ===========================================================================
 
 local function OnLensLayerOn(layerNum:number)
-    if layerNum == ML_LENS_LAYER then
+    if layerNum == GP_LENS_LAYER then
         local lens = {}
         LuaEvents.MinimapPanel_GetActiveModLens(lens)
-        if lens[1] == LENS_NAME then
+        if lens[1] == GROWTH_LENS_NAME then
             SetGrowthPropertyLens()
         end
     end
@@ -270,9 +292,14 @@ local GrowthPropertyLensEntry = {
 }
 
 -- modallenspanel.lua
-local PropertyLensModalPanelEntry = {}
-PropertyLensModalPanelEntry.LensTextKey = "LOC_HUD_GROWTH_PROPERTY_LENS"
-PropertyLensModalPanelEntry.Legend = {
+PropertyLegends["Growth"] = {
+    {"LOC_TOOLTIP_GROWTH_LOWEST",				ColorGradient[1]},
+    {"LOC_TOOLTIP_GROWTH_LOW",				    ColorGradient[2]},
+    {"LOC_TOOLTIP_GROWTH_MEDIUM",				ColorGradient[3]},
+    {"LOC_TOOLTIP_GROWTH_HIGH",				    ColorGradient[4]},
+    {"LOC_TOOLTIP_GROWTH_HIGHEST",			    ColorGradient[5]}
+}
+PropertyLegends["Value"] = {
     {"LOC_TOOLTIP_PROPERTY_LOWEST",				ColorGradient[1]},
     {"LOC_TOOLTIP_PROPERTY_LOW",				ColorGradient[2]},
     {"LOC_TOOLTIP_PROPERTY_MEDIUM",				ColorGradient[3]},
@@ -295,8 +322,9 @@ local function Initialize()
     Events.LoadScreenClose.Add(
         function()
             ChangeContainer()
-            LuaEvents.MinimapPanel_AddLensEntry(LENS_NAME, GrowthPropertyLensEntry)
-            LuaEvents.ModalLensPanel_AddLensEntry(LENS_NAME, PropertyLensModalPanelEntry)
+            LuaEvents.MinimapPanel_AddLensEntry(GROWTH_LENS_NAME, GrowthPropertyLensEntry)
+            LuaEvents.ModalLensPanel_AddLensEntry(GROWTH_LENS_NAME, PropertyLensModalGrowthPanelEntry)
+            LuaEvents.ModalLensPanel_AddLensEntry(VALUE_LENS_NAME, PropertyLensModalValuePanelEntry)
         end
     )
     Events.LensLayerOn.Add( OnLensLayerOn )

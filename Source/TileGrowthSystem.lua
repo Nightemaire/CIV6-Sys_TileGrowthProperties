@@ -47,8 +47,9 @@ hstructure PropertyListData
 end
 
 function DefineGrowthProperty(NewPropertyArgs : PropertyListData)
-
     if NewPropertyArgs ~= nil then
+        ID = NewPropertyArgs.ID
+        print("DEFINING GROWTH PROPERTY: "..ID)
         growthCalcFunc = NewPropertyArgs.GrowthCalcFunc
         if growthCalcFunc == nil then
             NewPropertyArgs.GrowthCalcFunc = function()
@@ -57,9 +58,6 @@ function DefineGrowthProperty(NewPropertyArgs : PropertyListData)
             end
         end
 
-        ID = NewPropertyArgs.ID
-        DebugTileGrowth("// Creating growth property: "..ID)
-        
         if PropertyList[ID] == nil then
             PropertyList[ID] = NewPropertyArgs
         else
@@ -68,15 +66,17 @@ function DefineGrowthProperty(NewPropertyArgs : PropertyListData)
 
         SetTurnTable(ID, {})
     else
-        print("ERROR: Tried to create a new growth property but an arg was nil")
+        print("ERROR: Tried to create a new growth property but the args were nil")
     end
-
 end
 function GetGrowthCalcFunc(PropertyID)
     return PropertyList[PropertyID].GrowthCalcFunc
 end
 function GetCallbackFunc(PropertyID)
     return PropertyList[PropertyID].CallbackFunc
+end
+function ChangeCallback(PropertyID, newCallbackFunc)
+    PropertyList[PropertyID].CallbackFunc = newCallbackFunc
 end
 function GetAllPropertyIDs(LensView : boolean, TooltipView : boolean)
     local list = {}
@@ -460,11 +460,11 @@ function UpdatePlot(PropertyID : string, plotID : number)
 
 		if not(PlotIsInitialized(PropertyID, plotID)) then
 			InitPlotPropertyData(PropertyID, pPlot)
+        else
+            GrowthCalc = GetGrowthCalcFunc(PropertyID)
+            newGrowth = GrowthCalc(plotID)
+            UpdatePlotProperties(PropertyID, pPlot)
 		end
-
-        GrowthCalc = GetGrowthCalcFunc(PropertyID)
-        newGrowth = GrowthCalc(plotID)
-        UpdatePlotProperties(PropertyID, pPlot)
     end
 end
 

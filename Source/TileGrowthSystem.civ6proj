@@ -6,7 +6,7 @@
     <Guid>979651ac-4cd7-44a2-b2ac-9753b9aa022c</Guid>
     <ProjectGuid>ccc58442-2d60-4449-ae8f-12af62283541</ProjectGuid>
     <ModVersion>1</ModVersion>
-    <Teaser>This system implements an efficient way of tracking properties that accumulate on tiles with the intent of triggering events wh</Teaser>
+    <Teaser>Modding utility framework</Teaser>
     <Description>This system implements an efficient way of tracking properties that accumulate on tiles with the intent of triggering events when they reach a specific threshold.</Description>
     <Authors>Nightemaire</Authors>
     <SpecialThanks>
@@ -31,9 +31,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="TileGrowthSystem.lua">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="TileGrowth_Readme.md">
       <SubType>Content</SubType>
     </Content>
     <Content Include="UI\ModLens_TileGrowth.lua">
