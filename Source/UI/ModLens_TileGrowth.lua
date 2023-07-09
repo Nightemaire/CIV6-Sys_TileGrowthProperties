@@ -1,3 +1,10 @@
+-- This implementation is based off the "Resource Lens" from Astog's "More Lenses" mod
+--
+-- A notable difference is dynamically updating the modal panel with different text
+-- depending on whether we're looking at the growth, or the value. This could also be
+-- extended to capture the trigger turn - though the value is implemented as a percentage
+-- of the current threshold, so this already sort of captures that information.
+
 local PANEL_OFFSET_Y:number = 32
 local PANEL_OFFSET_X:number = -5
 
@@ -12,6 +19,13 @@ ColorGradient[2]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_2")
 ColorGradient[3]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_3")
 ColorGradient[4]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_4")
 ColorGradient[5]			= UI.GetColorValue("COLOR_PROPERTY_GRADIENT_5")
+
+local GrowthGradient = {}
+GrowthGradient[1]			= UI.GetColorValue("COLOR_GROWTH_GRADIENT_1")
+GrowthGradient[2]			= UI.GetColorValue("COLOR_GROWTH_GRADIENT_2")
+GrowthGradient[3]			= UI.GetColorValue("COLOR_GROWTH_GRADIENT_3")
+GrowthGradient[4]			= UI.GetColorValue("COLOR_GROWTH_GRADIENT_4")
+GrowthGradient[5]			= UI.GetColorValue("COLOR_GROWTH_GRADIENT_5")
 
 -- ===========================================================================
 --  Member Variables
@@ -293,11 +307,11 @@ local GrowthPropertyLensEntry = {
 
 -- modallenspanel.lua
 PropertyLegends["Growth"] = {
-    {"LOC_TOOLTIP_GROWTH_LOWEST",				ColorGradient[1]},
-    {"LOC_TOOLTIP_GROWTH_LOW",				    ColorGradient[2]},
-    {"LOC_TOOLTIP_GROWTH_MEDIUM",				ColorGradient[3]},
-    {"LOC_TOOLTIP_GROWTH_HIGH",				    ColorGradient[4]},
-    {"LOC_TOOLTIP_GROWTH_HIGHEST",			    ColorGradient[5]}
+    {"LOC_TOOLTIP_GROWTH_LOWEST",				GrowthGradient[1]},
+    {"LOC_TOOLTIP_GROWTH_LOW",				    GrowthGradient[2]},
+    {"LOC_TOOLTIP_GROWTH_MEDIUM",				GrowthGradient[3]},
+    {"LOC_TOOLTIP_GROWTH_HIGH",				    GrowthGradient[4]},
+    {"LOC_TOOLTIP_GROWTH_HIGHEST",			    GrowthGradient[5]}
 }
 PropertyLegends["Value"] = {
     {"LOC_TOOLTIP_PROPERTY_LOWEST",				ColorGradient[1]},

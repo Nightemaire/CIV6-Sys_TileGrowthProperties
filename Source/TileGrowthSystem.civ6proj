@@ -19,6 +19,9 @@
     <AssemblyName>TileGrowthSystem</AssemblyName>
     <RootNamespace>TileGrowthSystem</RootNamespace>
     <InGameActionData><![CDATA[<InGameActions><UpdateText id="Add_Localization"><File>UI/TileGrowth_UI_Text.xml</File></UpdateText><UpdateDatabase id="Add_Colors"><File>UI/TileGrowth_Lens_Colors.sql</File></UpdateDatabase><AddUserInterfaces id="Add_Lens"><Properties><LoadOrder>102</LoadOrder><Context>InGame</Context></Properties><File>UI/ModLens_TileGrowth.xml</File></AddUserInterfaces><AddGameplayScripts id="Add_System"><File>TileGrowthSystem.lua</File></AddGameplayScripts><ReplaceUIScript id="Add_PlotTooltip"><Properties><LuaContext>PlotToolTip</LuaContext><LuaReplace>PlotToolTip_TileGrowth.lua</LuaReplace><LoadOrder>14050</LoadOrder></Properties><File>PlotToolTip_TileGrowth.lua</File></ReplaceUIScript><ImportFiles id="Import_Tooltip"><Properties><LoadOrder>0</LoadOrder></Properties><File>UI/PlotToolTip_TileGrowth.lua</File></ImportFiles></InGameActions>]]></InGameActionData>
+    <AssociationData><![CDATA[<Associations>
+  <Dependency type="Mod" title="More Lenses" id="35f33319-ad93-4d6b-bf27-406fac382d06" />
+</Associations>]]></AssociationData>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
     <OutputPath>.</OutputPath>
