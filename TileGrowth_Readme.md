@@ -49,19 +49,29 @@ If the plot isn't initialized yet, UpdatePlot() will do so anyway, and the resul
 
 ## What's Cached
 
+The system caches information in properties to ensure continuity between saves. The information is split between plot properties, and game properties.
+
+### Plot Properties
+
 Behind the scenes, the system caches the following information for each plot as their own individually assigned properties. Each property ID is prefixed by "GP_{PropertyID}_" to minimize the possibility of overwriting the properties, and to permit multiple properties on a plot at one time.
+
 ```lua
-"Value"           = 0,									-- Stores the value of the plot from the last time it was checked
-"Growth" 		  = Growth,								-- Stores the current growth rate of the plot
-"LastUpdate" 	  = Game.GetCurrentGameTurn(),			-- Contains the turn number of the last time the value was updated
-"Threshold"       = PropertyData.DefaultThreshold,		-- The current threshold which the system uses to evaluate when the trigger should occur
-"MaxVal"          = PropertyData.DefaultThreshold,		-- The maximum value of a property allowed for this plot
-"MinVal"          = PropertyData.DefaultThreshold,		-- The minimum value of a property allowed for this plot
-"TriggersOn" 	  = TriggerTurn,						-- The estimated turn for when this plot should cross the assigned threshold
-"Triggered" 	  = TriggerTurn,						-- A flag indicating whether this plot is or has been triggered, the behavior of this variable is governed by the property itself
+"Value"      	= number,	-- Stores the value of the plot from the last time it was checked
+"Growth" 		= number,	-- Stores the current growth rate of the plot
+"LastUpdate" 	= number,	-- Contains the turn number of the last time the value was updated
+"Threshold"  	= number,	-- The current threshold which the system uses to evaluate when the trigger should occur
+"MaxVal"		= number,	-- The maximum value of a property allowed for this plot
+"MinVal"		= number,	-- The minimum value of a property allowed for this plot
+"TriggersOn"	= number,	-- The estimated turn for when this plot should cross the assigned threshold
+"Triggered"		= boolean,	-- A flag indicating whether this plot is or has been triggered, the behavior of this variable is governed by the property itself
 ```
-Additionally, there is a table attached as a game property which contains indices of tiles that should trigger on any given turn.
-An event is registered for the start of every turn which removes the entry corresponding to the current game turn, and checks each tile in the list to see if it has triggered, and if so invokes the callback. The structure of the table is as follows:
+
+All plot properties have read access exposed, but only some have write access. This is controlled to ensure continuity of the TurnTable. The properties that can be manually adjusted are: Value, Growth, Threshold, MaxVal, MinVal, and Triggered.
+
+### Game Properties
+
+Additionally, there is a table attached as a game property which contains indices of tiles that should trigger on any given turn. An event is registered for the start of every turn which removes the entry corresponding to the current game turn, and checks each tile in the list to see if it has triggered, and if so invokes the callback. The structure of the table is as follows:
+
 ```lua
 TurnTable =
 {
@@ -80,7 +90,10 @@ TurnTable =
 	...
 }
 ```
-Where m and n are turn indices, and i_x and j_x are plot indices scheduled to trigger each turn. The value in the table for each turn is irrelevant, all we need to know is that an entry exists with the key we specify, (i.e. `TurnTable[n][i_1] ~= nil`). Each plot ID should only be represented in the table one time, and one time only. It is highly advisable to NOT modify the turn table...though if you're clever it may be possible...
+
+Where m and n are turn indices, and i_x and j_x are plot indices scheduled to trigger each turn. The value in the table for each turn is irrelevant, all we need to know is that an entry exists with the key we specify, (i.e. `TurnTable[n][i_1] ~= nil`). Each plot ID should only be represented in the table one time, and one time only. It is highly advisable to NOT modify the turn table...and it is purposefully not exposed, though if you're clever it may be possible...
+
+### Disclaimer
 
 I'm uncertain how much of an impact caching these properties will have on load times, rates of crashing, or save file sizes - but I expect there will be some effect. I hope it will be marginal on average size maps, but it could become serious on large maps with a lot of properties.
 
@@ -91,3 +104,15 @@ One major benefit of this framework is it comes prepackaged with two UI features
 At this time, it is beyond the scope of the framework to enable custom lensing or tooltip behavior - but if you know you're way around how this stuff is implemented you can probably figure it out yourself. If the demand for it is high, then an extension may be warranted.
 
 ***Many thanks to Astog and his 'More Lenses' mod, as this would not have been possible without it!***
+
+## Potential Applications
+
+With the basics in mind, here are a few ideas of things that could be implemented that utilize the growth property system.
+
+* Waste Management/Pollution
+* Sickness/Disease
+* Dissent (Like a loyalty rework)
+* Scenarios
+* Population
+
+Don't feel like you need to ask permission if you're inspired to try any of these :)
